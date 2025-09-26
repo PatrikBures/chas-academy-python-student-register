@@ -1,5 +1,5 @@
-import sqlite3
 import menu
+import sq
 
 
 def add_student():
@@ -9,6 +9,8 @@ def _exit():
     return True
 
 def main():
+    sq.init_table()
+
     actions = {
         "Add student": add_student,
         "Exit": _exit
