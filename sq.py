@@ -14,3 +14,15 @@ def init_table():
 
     con.commit()
     con.close()
+
+def add_student(name, age, hobby):
+    con = sqlite3.connect(PATH)
+    cur = con.cursor()
+
+    data = (name, age, hobby)
+
+
+    cur.execute(f"INSERT INTO students VALUES(?,?,?)", data)
+
+    con.commit()
+    con.close()
