@@ -3,7 +3,21 @@ import sq
 
 
 def add_student():
-    pass
+    name = ""
+    try:
+        while not name:
+            name = input("Name: ")
+
+        age = menu.select_int_range("Age: ", 0, 1000)
+        if age < 0: return
+
+        hobby = input("Hobby: ")
+    except KeyboardInterrupt:
+        return
+    
+    sq.add_student(name, age, hobby)
+    
+    
 
 def _exit():
     return True
