@@ -18,13 +18,19 @@ def add_student():
     sq.add_student(name, age, hobby)
     
 def list_students():
-    for student in sq.get_all_students():
+    students = sq.get_all_students()
+
+    if not students: return
+
+    print("students:")
+    for student in students:
         print(f"{student[0]} -- {student[1]} -- {student[2]}")
 
 def _exit():
     return True
 
 def main():
+    sq.open()
     sq.init_table()
 
     actions = {
@@ -38,7 +44,8 @@ def main():
 
         if exit_loop:
             break
-    pass
+
+    sq.close()
 
 if __name__ == "__main__":
     main()

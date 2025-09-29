@@ -2,35 +2,43 @@ import sqlite3
 from pathlib import Path
 
 PATH = Path("db.sqlite3")
+CON = None
+
+def open():
+    global CON
+    CON = sqlite3.connect(PATH)
+    
+def close():
+    if CON:
+        CON.close()
 
 def init_table():
-    if PATH.exists():
-        return
+    if PATH.exists() or not CON: return
 
-    con = sqlite3.connect(PATH)
-    cur = con.cursor()
+    cur = CON.cursor()
 
     cur.execute("CREATE TABLE students(name, age, hobby)")
 
-    con.commit()
-    con.close()
+    CON.commit()
 
 def add_student(name, age, hobby):
-    con = sqlite3.connect(PATH)
-    cur = con.cursor()
+    if not CON: return
+
+    cur = CON.cursor()
 
     data = (name, age, hobby)
 
 
     cur.execute(f"INSERT INTO students VALUES(?,?,?)", data)
 
-    con.commit()
-    con.close()
+    CON.commit()
 
 def get_all_students():
-    con = sqlite3.connect(PATH)
-    cur = con.cursor()
+    if not CON: return
+
+    cur = CON.cursor()
 
     students = cur.execute(f"SELECT name, age, hobby FROM students ORDER BY name")
+    print(students)
     return students
 
