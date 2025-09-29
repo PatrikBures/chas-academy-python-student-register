@@ -22,9 +22,11 @@ def list_students():
 
     if not students: return
 
-    print("students:")
+    format = "{:<15} {:<5} {:<15}"
+    print(format.format("Name:", "Age:", "Hobby:"))
+
     for student in students:
-        print(f"{student[0]} -- {student[1]} -- {student[2]}")
+        print(format.format(student[0], student[1], student[2]))
 
 def _exit():
     return True
