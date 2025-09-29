@@ -17,7 +17,9 @@ def add_student():
     
     sq.add_student(name, age, hobby)
     
-    
+def list_students():
+    for student in sq.get_all_students():
+        print(f"{student[0]} -- {student[1]} -- {student[2]}")
 
 def _exit():
     return True
@@ -27,6 +29,7 @@ def main():
 
     actions = {
         "Add student": add_student,
+        "List all students": list_students,
         "Exit": _exit
     }
 

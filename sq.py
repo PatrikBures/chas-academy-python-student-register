@@ -26,3 +26,11 @@ def add_student(name, age, hobby):
 
     con.commit()
     con.close()
+
+def get_all_students():
+    con = sqlite3.connect(PATH)
+    cur = con.cursor()
+
+    students = cur.execute(f"SELECT name, age, hobby FROM students ORDER BY name")
+    return students
+
