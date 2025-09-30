@@ -38,9 +38,10 @@ def search_student(name_to_search):
 
     cur = CON.cursor()
     
-    found_student = cur.execute(f"SELECT name, age, hobby FROM students WHERE name = '{name_to_search}';")
+    cur.execute(f"SELECT name, age, hobby FROM students WHERE name = '{name_to_search}';")
+    found_students = cur.fetchall()
     
-    return found_student
+    return found_students
 
 def get_all_students():
     if not CON: return
