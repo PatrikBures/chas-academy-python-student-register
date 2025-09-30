@@ -13,11 +13,11 @@ def close():
         CON.close()
 
 def init_table():
-    if PATH.exists() or not CON: return
+    if not CON: return
 
     cur = CON.cursor()
 
-    cur.execute("CREATE TABLE students(name, age, hobby)")
+    cur.execute("CREATE TABLE IF NOT EXISTS students(name, age, hobby)")
 
     CON.commit()
 
