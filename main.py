@@ -28,6 +28,29 @@ def list_students():
     for student in students:
         print(format.format(student[0], student[1], student[2]))
 
+def search_student():
+    name_to_search = ""
+    try:
+        while not name_to_search:
+            name_to_search = input("Search student by name: ")
+    except KeyboardInterrupt:
+        return
+
+    found_students = sq.search_student(name_to_search)
+
+    amount_found = 0
+    if found_students:
+        for student in found_students:
+            print(f"Name: {student[0]}, Age: {student[1]} Hobby: {student[2]}")
+            amount_found += 1
+
+    if amount_found == 0:
+        print(f"No student with name {name_to_search}.")
+    else:
+        print(f"Found {amount_found} student/s with that name.")
+
+
+
 def _exit():
     return True
 
@@ -38,6 +61,7 @@ def main():
     actions = {
         "Add student": add_student,
         "List all students": list_students,
+        "Search student": search_student,
         "Exit": _exit
     }
 

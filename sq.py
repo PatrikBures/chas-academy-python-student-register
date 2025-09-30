@@ -32,6 +32,15 @@ def add_student(name, age, hobby):
     cur.execute(f"INSERT INTO students VALUES(?,?,?)", data)
 
     CON.commit()
+    
+def search_student(name_to_search):
+    if not CON: return
+
+    cur = CON.cursor()
+    
+    found_student = cur.execute(f"SELECT name, age, hobby FROM students WHERE name = '{name_to_search}';")
+    
+    return found_student
 
 def get_all_students():
     if not CON: return
@@ -39,6 +48,6 @@ def get_all_students():
     cur = CON.cursor()
 
     students = cur.execute(f"SELECT name, age, hobby FROM students ORDER BY name")
-    print(students)
+
     return students
 
