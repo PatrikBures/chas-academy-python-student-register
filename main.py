@@ -47,7 +47,7 @@ def search_student():
     amount_found = 0
     if found_students:
         for student in found_students:
-            print(f"Name: {student[0]}, Age: {student[1]} Hobby: {student[2]}")
+            print(f"Name: {student[1]}, Age: {student[2]} Hobby: {student[3]}")
             amount_found += 1
 
     if amount_found == 0:
@@ -64,6 +64,44 @@ def calculate_avg_age():
 
     menu.confirm_return(f"The average age is {avg_age}. ")
 
+def remove_student():
+    name_to_remove = ""
+
+    try:
+        while not name_to_remove:
+            name_to_remove = input("Remove student by name: ")
+    except KeyboardInterrupt:
+        return
+
+    found_students = sq.search_student(name_to_remove)
+
+    if found_students:
+        if len(found_students) == 1:
+            sq.remove_rows([found_students[0][0]])
+            menu.confirm_return(f"Removed {name_to_remove} from db. ")
+        else:
+            print(f"Multiple students found with named \"{name_to_remove}\", specify which ones to remove by inputing numbers seperated with space.")
+            options = []
+            row_ids = []
+
+            for student in found_students:
+                row_ids.append(student[0])
+                options.append(f"Name: {student[1]}, Age: {student[2]}, Hobby: {student[3]}")
+
+            selected_options = menu.select_multi_option(options)
+            
+            row_ids_to_remove = []
+
+            for i in selected_options:
+                row_ids_to_remove.append(row_ids[i])
+
+
+            sq.remove_rows(row_ids_to_remove)
+
+            menu.confirm_return(f"Removed {len(row_ids_to_remove)} students from db. ")
+
+
+
 
 
 
@@ -76,6 +114,7 @@ def main():
 
     actions = {
         "Add student": add_student,
+        "Remove student": remove_student,
         "List all students": list_students,
         "Search student": search_student,
         "Calculate average age": calculate_avg_age,

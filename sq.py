@@ -38,7 +38,7 @@ def search_student(name_to_search):
 
     cur = CON.cursor()
     
-    cur.execute(f"SELECT name, age, hobby FROM students WHERE name = '{name_to_search}';")
+    cur.execute(f"SELECT rowid, name, age, hobby FROM students WHERE name = '{name_to_search}';")
     found_students = cur.fetchall()
     
     return found_students
@@ -48,7 +48,9 @@ def get_all_students():
 
     cur = CON.cursor()
 
-    students = cur.execute(f"SELECT name, age, hobby FROM students ORDER BY name")
+    cur.execute(f"SELECT name, age, hobby FROM students ORDER BY name")
+
+    students = cur.fetchall()
 
     return students
 
@@ -68,3 +70,16 @@ def get_avg_age():
         avg_age = round(avg_age, 2)
 
     return avg_age
+
+def remove_rows(rows):
+    if not CON: return
+
+    cur = CON.cursor()
+    
+    data = []
+    for row in rows:
+        data.append((row,))
+
+    cur.executemany(f"DELETE FROM students WHERE rowid = ?", data)
+
+    CON.commit()
