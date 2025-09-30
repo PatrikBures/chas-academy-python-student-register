@@ -53,6 +53,16 @@ def search_student():
     else:
         menu.confirm_return(f"Found {amount_found} student/s with that name. ")
 
+def calculate_avg_age():
+    avg_age = sq.get_avg_age()
+
+    if avg_age is None:
+        menu.confirm_return("No students in db. ")
+        return
+
+    menu.confirm_return(f"The average age is {avg_age}. ")
+
+
 
 
 def _exit():
@@ -66,6 +76,7 @@ def main():
         "Add student": add_student,
         "List all students": list_students,
         "Search student": search_student,
+        "Calculate average age": calculate_avg_age,
         "Exit": _exit
     }
 
