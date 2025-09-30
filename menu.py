@@ -1,3 +1,9 @@
+def confirm_return(title = ""):
+    try:
+        input(f"{title}Press <Enter> to return. ")
+    except KeyboardInterrupt:
+        pass
+
 def select_int_range(title, min, max):
     while True:
         num = ""

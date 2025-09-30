@@ -17,6 +17,8 @@ def add_student():
     
     sq.add_student(name, age, hobby)
     
+    menu.confirm_return(f"Added \"{name}\" to db. ")
+    
 def list_students():
     students = sq.get_all_students()
 
@@ -27,6 +29,8 @@ def list_students():
 
     for student in students:
         print(format.format(student[0], student[1], student[2]))
+
+    menu.confirm_return()
 
 def search_student():
     name_to_search = ""
@@ -45,9 +49,9 @@ def search_student():
             amount_found += 1
 
     if amount_found == 0:
-        print(f"No student with name {name_to_search}.")
+        menu.confirm_return(f"No student with name {name_to_search}. ")
     else:
-        print(f"Found {amount_found} student/s with that name.")
+        menu.confirm_return(f"Found {amount_found} student/s with that name. ")
 
 
 
