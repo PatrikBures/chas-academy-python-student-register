@@ -22,7 +22,9 @@ def add_student():
 def list_students():
     students = sq.get_all_students()
 
-    if not students: return
+    if not students: 
+        menu.confirm_return("No students in db. ")
+        return
 
     format = "{:<15} {:<5} {:<15}"
     print(format.format("Name:", "Age:", "Hobby:"))
